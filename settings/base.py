@@ -28,7 +28,7 @@ LOCALE_PATH = os.path.join(BASE_DIR, 'locale')
 # APPLICATION_CLASS = 'backup.apps.AnthillApplication'
 APPLICATION_NAME = 'backup'
 APPLICATION_VERBOSE_NAME = _('Backup')
-APPLICATION_DESCRIPTION = _('Service description')
+APPLICATION_DESCRIPTION = _('Database dumps administration service')
 APPLICATION_ICON_CLASS = 'icon-history'
 APPLICATION_COLOR = 'brown'
 
