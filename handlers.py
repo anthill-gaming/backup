@@ -1,12 +1,12 @@
 from anthill.framework.utils.asynchronous import as_future, thread_pool_exec as future_exec
 from anthill.framework.utils import timezone
 from anthill.framework.handlers import JSONHandler
-from anthill.platform.auth.handlers import UserHandlerMixin
+from anthill.platform.handlers import UserHandlerMixin
 from backup.models import Backup, Group, Recovery
 from datetime import datetime
 
 
-class BackupHandler(UserHandlerMixin, JSONHandler):
+class BackupHandler(JSONHandler, UserHandlerMixin):
     @as_future
     def get_object(self, object_id: str):
         return Backup.query.get(object_id)
@@ -42,7 +42,7 @@ class BackupHandler(UserHandlerMixin, JSONHandler):
         pass
 
 
-class BackupLogHandler(UserHandlerMixin, JSONHandler):
+class BackupLogHandler(JSONHandler, UserHandlerMixin):
     @as_future
     def get_objects(self, **kwargs):
         return Backup.query.filter_by(**kwargs).all()
@@ -59,7 +59,7 @@ class BackupLogHandler(UserHandlerMixin, JSONHandler):
         self.write(data)
 
 
-class CreateBackupHandler(UserHandlerMixin, JSONHandler):
+class CreateBackupHandler(JSONHandler, UserHandlerMixin):
     @as_future
     def create_object(self):
         group_id = self.get_argument('group_id', None)
@@ -88,7 +88,7 @@ class CreateBackupHandler(UserHandlerMixin, JSONHandler):
         self.write(data)
 
 
-class RecoveryHandler(UserHandlerMixin, JSONHandler):
+class RecoveryHandler(JSONHandler, UserHandlerMixin):
     @as_future
     def get_object(self, object_id: str):
         return Recovery.query.get(object_id)
@@ -103,7 +103,7 @@ class RecoveryHandler(UserHandlerMixin, JSONHandler):
         self.write(data)
 
 
-class RecoveryLogHandler(UserHandlerMixin, JSONHandler):
+class RecoveryLogHandler(JSONHandler, UserHandlerMixin):
     @as_future
     def get_objects(self, **kwargs):
         return Recovery.query.filter_by(**kwargs).all()
